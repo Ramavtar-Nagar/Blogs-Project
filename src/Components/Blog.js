@@ -69,7 +69,24 @@ export default function Blog(){
 
     }, []);
     
-    
+    //Passing the synthetic event as argument to stop refreshing the page on submit
+    async function handleSubmit(e){
+        e.preventDefault();
+
+        //setBlogs([{title: formData.title, content:formData.content}, ...blogs]);
+        dispatch({type: "ADD", blog:{title: formData.title, content:formData.content}});
+        setFormData({title: "", content: ""});
+        titleRef.current.focus();
+
+        const docRef = doc(collection(db, "blogs"))
+        // await addDocs(docRef,{
+        await setDoc(docRef,{
+        title: formData.title,
+        content: formData.content,
+        createdOn:new Date()
+    });
+
+    }
 
 
     async function removeBlog(id){
