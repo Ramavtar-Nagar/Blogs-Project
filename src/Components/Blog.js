@@ -71,6 +71,18 @@ export default function Blog(){
     
     
 
+
+    async function removeBlog(id){
+        // setBlogs(blogs.filter((blog,index) => 
+        //  i !== index 
+        //  ))
+
+        // dispatch({type:"REMOVE", index:i})
+
+        const docRef = doc(db, "blogs", id);
+        await deleteDoc(docRef);
+    }
+
     return(
         <>
         {/* Heading of the page */}
